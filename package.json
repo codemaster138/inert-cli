@@ -4,6 +4,9 @@
   "description": "CLI for the inert static site generator",
   "main": "index.js",
   "scripts": {},
+  "bin": {
+    "inert": "./index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codemaster138/inert-cli.git"

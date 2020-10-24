@@ -29,18 +29,26 @@ function ncp_async(source, dest) {
 }
 
 module.exports = async function init() {
+    let failed = false;
     // Message
     console.log(`Initalizing a new project ${chalk.cyan(process.cwd())}\n`);
 
     // Create package.json
     const spinner = ora('Creating package.json');
-    await execa.command('npm init -y').catch((e) => { spinner.fail(`Error: ${e.message}`); process.exit() });
+    await execa.command('npm init -y').catch((e) => { spinner.fail(`Error: ${e.message}`); failed = true });
+    if (failed) return false;
     spinner.succeed();
 
     // Install packages
     spinner.start(`Installing package: ${chalk.cyan('inert-compiler')}`);
-    await execa.command('npm install inert-compiler').catch((e) => { spinner.fail(`Error: ${e.message}`); process.exit() });
-    spinner.succeed();
+    await execa.command('npm install inert-compiler').catch((e) => { spinner.fail(`Error: ${e.message}`); failed = true });
+    if (failed) return false;
+
+    spinner.text = `Installing package: ${chalk.cyan('http-server')}`
+    await execa.command('npm install http-server --save-dev').catch((e) => { spinner.fail(`Error: ${e.message}`); failed = true });
+    if (failed) return false;
+
+    spinner.succeed('Installed dependencies');
 
     // Create folders and files
     spinner.start(`Creating boilerplate folders and files: Step ${chalk.cyan(1)}/2`);
@@ -51,8 +59,10 @@ module.exports = async function init() {
     fs.mkdirSync('./templates');
 
     spinner.succeed().start(`Creating boilerplate folders and files: Step ${chalk.cyan(2)}/2`);
-    await ncp_async(path.resolve(__dirname, '../template/scss'), './scss').catch((e) => { spinner.fail(`Error: ${e}`); process.exit() });
-    await ncp_async(path.resolve(__dirname, '../template/templates'), './templates').catch((e) => { spinner.fail(`Error: ${e}`); process.exit() });
+    await ncp_async(path.resolve(__dirname, '../template/scss'), './scss').catch((e) => { spinner.fail(`Error: ${e}`); failed = true });
+    if (failed) return false;
+    await ncp_async(path.resolve(__dirname, '../template/templates'), './templates').catch((e) => { spinner.fail(`Error: ${e}`); failed = true });
+    if (failed) return false;
     spinner.succeed();
 
     // Create inert.config.js
@@ -69,7 +79,8 @@ module.exports = async function init() {
         type: 'input',
         message: 'Describe yourself:',
         name: 'description'
-    }]).catch(e => process.exit());
+    }]).catch(e => failed = true);
+    if (failed) return false;
 
     const configText = `const config = {
     build: {
@@ -113,4 +124,6 @@ module.exports = config;`;
     console.log(`\n${chalk.green('Successfully generated a new Inert project')}`)
     console.log(`\nTo build your project, run ${chalk.cyan('inert build')}\nTo serve a demo of your project, run ${chalk.cyan('inert serve')}\n\nMake sure to point your server's root directory to ${chalk.cyan(path.resolve(process.cwd(), './public'))}\n`);
     console.log('Have fun!');
+
+    return true;
 }
