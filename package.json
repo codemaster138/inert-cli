@@ -1,0 +1,25 @@
+{
+  "name": "inert-cli",
+  "version": "1.0.0",
+  "description": "CLI for the inert static site generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codemaster138/inert-cli.git"
+  },
+  "keywords": [
+    "CLI",
+    "static-site-generator",
+    "Frontend",
+    "Backend"
+  ],
+  "author": "Jake Sarjeant <pygamer138@gmail.com> (https://codemaster138.github.io)",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/codemaster138/inert-cli/issues"
+  },
+  "homepage": "https://github.com/codemaster138/inert-cli#readme"
+}
