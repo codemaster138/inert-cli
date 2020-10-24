@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "CLI for the inert static site generator",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codemaster138/inert-cli.git"
@@ -24,6 +22,10 @@
   "homepage": "https://github.com/codemaster138/inert-cli#readme",
   "dependencies": {
     "chalk": "^4.1.0",
-    "enquirer": "^2.3.6"
+    "enquirer": "^2.3.6",
+    "execa": "^4.0.3",
+    "ncp": "^2.0.0",
+    "ora": "^5.1.0",
+    "yargs": "^16.1.0"
   }
 }
