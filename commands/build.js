@@ -18,7 +18,8 @@ module.exports = async function build(watch) {
     const command = `inert-compiler ${watch ? 'watch':  'build'}`
     console.log(`❯ ${chalk.cyan(command)}`);
 
-    let child = execa.command('npx ' + command);
+    let child = execa.command('npx ' + command, {all: true, shell: true});
+    child.all.pipe(process.stdout);
     await child;
 
     return true;
