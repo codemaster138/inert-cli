@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <meta name="google-site-verification" content="WNFd2YVX2FFhHrTL8vAR4bpvvNxOdskINFn9zyiotoI" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home | <%=posts.config.blogName%></title>
@@ -24,15 +23,15 @@
     </aside>
     <main>
         <div class="markdown-section">
-            <%-html(posts.map(post => `
-                    <div class="post">
-                        <h1><a href="/${post.path}">${post.attributes.title}</a></h1>
-                        <p class="published">Published on ${post.attributes.date}</p>
-                        ${post.attributes.cover ? `<img src="${post.attributes.cover}" width="100%"/>` : ''}
-                        <p class="preview">${marked(post.rawBody.substring(0, 100)).replace(/<[^>]+>/gim, '')}...</p>
-                        <a href="/${post.path}">Read more</a>
-                    </div>
-                `).join('\n'))%>
+            <% posts.forEach(function (post) { %>
+                <div class="post">
+                    <h1><a href="/<%=post.path%>"><%=post.attributes.title%></a></h1>
+                    <p class="published">Published on <%=post.attributes.date%></p>
+                    <%-post.attributes.cover ? `<img src="${post.attributes.cover}" width=100%/>` : ''%>
+                    <p class="preview"><%-marked(post.rawBody.substring(0, 100)).replace(/<[^>]+>/gim, '').replace('\n', '')%>...</p>
+                    <a href="/<%=post.path%>">Read more</a>
+                </div>
+            <% }); %>
         </div>
     </main>
 </body>
