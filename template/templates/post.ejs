@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="${post.attributes.description}" />
-        <title><%=posts.attributes.title%> | <%=posts.config.blogName%></title>
+        <title><%=post.attributes.title%> | <%=posts.config.blogName%></title>
         <link rel="stylesheet" href="/index.css" />
         <link rel="stylesheet" href="/assets/prism.css" />
         <%const html = require('html-format')%>
@@ -21,9 +21,9 @@
         </aside>
         <main>
             <div class="markdown-section">
-                <h1 align="center" class="title"><%=posts.attributes.title%></h1>
-                <%-posts.body%>
-                <%-posts.attributes.dev_to_link ? `<p><a href="${posts.attributes.dev_to_link}">This post is available on dev</a></p>` : ''%>
+                <h1 align="center" class="title"><%=post.attributes.title%></h1>
+                <%-post.body%>
+                <%-post.attributes.dev_to_link ? `<p><a href="${post.attributes.dev_to_link}">This post is available on dev</a></p>` : ''%>
             </div>
         </main>
     </body>
