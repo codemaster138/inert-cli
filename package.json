@@ -1,34 +1,40 @@
 {
-  "name": "inert-cli",
-  "version": "1.1.2",
-  "description": "CLI for the inert static site generator",
-  "main": "index.js",
-  "scripts": {},
-  "bin": {
-    "inert": "./index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/codemaster138/inert-cli.git"
-  },
-  "keywords": [
-    "CLI",
-    "static-site-generator",
-    "Frontend",
-    "Backend"
-  ],
-  "author": "Jake Sarjeant <pygamer138@gmail.com> (https://codemaster138.github.io)",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/codemaster138/inert-cli/issues"
-  },
-  "homepage": "https://github.com/codemaster138/inert-cli#readme",
-  "dependencies": {
-    "chalk": "^4.1.0",
-    "enquirer": "^2.3.6",
-    "execa": "^4.0.3",
-    "ncp": "^2.0.0",
-    "ora": "^5.1.0",
-    "yargs": "^16.1.0"
-  }
+    "name": "inert-cli",
+    "version": "2.0.0",
+    "description": "CLI for the inert static site generator",
+    "main": "index.js",
+    "scripts": {
+        "build": "tsc"
+    },
+    "bin": {
+        "inert": "out/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/codemaster138/inert-cli.git"
+    },
+    "keywords": [
+        "CLI",
+        "static-site-generator",
+        "Frontend",
+        "Backend"
+    ],
+    "author": "Jake Sarjeant <pygamer138@gmail.com> (https://codemaster138.github.io)",
+    "license": "GPL-3.0",
+    "bugs": {
+        "url": "https://github.com/codemaster138/inert-cli/issues"
+    },
+    "homepage": "https://github.com/codemaster138/inert-cli#readme",
+    "dependencies": {
+        "chalk": "^4.1.0",
+        "enquirer": "^2.3.6",
+        "execa": "^4.0.3",
+        "ncp": "^2.0.0",
+        "ora": "^5.1.0"
+    },
+    "devDependencies": {
+        "@types/ncp": "^2.0.4",
+        "@types/node": "^14.14.9",
+        "typescript": "^4.1.2"
+    }
 }
