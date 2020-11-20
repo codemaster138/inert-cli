@@ -1,0 +1,49 @@
+const config = {
+    build: {
+        input: "./posts",
+        output: "./public",
+        sassEntry: './scss/index.scss',
+        sassFolder: './scss',
+        sassOutput: 'index.css',
+        templates: {
+            home: './templates/home.ejs',
+            post: './templates/post.ejs'
+        }
+    },
+    blogName: `<%- answers.projectName.replace('`', '') %> Docs`,
+    ownerName: `<%- answers.projectName.replace('`', '') %>`,
+    description: `<%- answers.description.replace('`', '') %>`,
+    navLinks: [{
+            href: '/',
+            text: 'Home'
+        },
+        {
+            href: '/docs',
+            text: 'Docs'
+        },
+        {
+            href: '<%- answers.github.replace("'", '') %>',
+            text: 'Source'
+        },
+        {
+            hreg: '/contact',
+            text: 'Contact'
+        }
+    ],
+    plugins: ['plugin.js'],
+    assets: './assets',
+    sidebar: [{
+        type: 'heading',
+        text: 'Getting Started'
+    }, {
+        type: 'link',
+        href: '/introduction',
+        text: 'Introduction'
+    }, {
+        type: 'link',
+        href: '/api',
+        text: 'Core API Reference'
+    }]
+}
+
+module.exports = config;

@@ -12,6 +12,7 @@ var get_package_version_1 = __importDefault(require("@jsbits/get-package-version
 var chalk_1 = require("chalk");
 var tauris_1 = require("tauris");
 var build_1 = __importDefault(require("./commands/build"));
+var create_1 = __importDefault(require("./commands/create"));
 var header = " _____                 _   \n|_   _|               | |  \n  | |  _ __   ___ _ __| |_ \n  | | | '_ \\ / _ \\ '__| __|\n _| |_| | | |  __/ |  | |_ \n|_____|_| |_|\\___|_|   \\__| CLI v" + get_package_version_1.default(__dirname);
 var argv = new tauris_1.Command('inert')
     .header(header)
@@ -22,6 +23,7 @@ var argv = new tauris_1.Command('inert')
     type: 'boolean'
 })
     .command(build_1.default)
+    .command(create_1.default)
     .demandArgument()
     .parse(process.argv.slice(2));
 if (argv) {

@@ -1,0 +1,36 @@
+const config = {
+    build: {
+        input: "./posts",
+        output: "./public",
+        sassEntry: './scss/index.scss',
+        sassFolder: './scss',
+        sassOutput: 'index.css',
+        templates: {
+            home: './templates/home.ejs',
+            post: './templates/post.ejs'
+        }
+    },
+    blogName: `<%- answers.blogName.replace('`', '') %>`,
+    ownerName: `<%- answers.ownerName.replace('`', '') %>`,
+    description: `<%- answers.description.replace('`', '') %>`,
+    navLinks: [
+        {
+            href: '/',
+            text: 'Home'
+        },
+        {
+            href: '/about',
+            text: 'About'
+        },
+        {
+            href: 'https://dev.to/username',
+            text: 'DEV.to'
+        },
+        {
+            href: 'https://twitter.com/username',
+            text: 'Twitter'
+        }
+    ],
+    assets: './assets',
+}
+module.exports = config;

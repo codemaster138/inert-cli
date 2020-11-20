@@ -8,6 +8,7 @@ import getPackageVersion from '@jsbits/get-package-version';
 import { cyan } from 'chalk';
 import { Command } from 'tauris';
 import build from './commands/build';
+import create from './commands/create';
 
 const header = ` _____                 _   
 |_   _|               | |  
@@ -25,6 +26,7 @@ const argv = new Command('inert')
         type: 'boolean'
     })
     .command(build)
+    .command(create)
     .demandArgument()
     .parse(process.argv.slice(2));
 

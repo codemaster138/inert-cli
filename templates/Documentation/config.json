@@ -1,0 +1,15 @@
+[
+    {
+        "type": "input",
+        "message": "What's your project's name?",
+        "name": "projectName"
+    }, {
+        "type": "input",
+        "message": "Describe your project:",
+        "name": "description"
+    }, {
+        "type": "input",
+        "message": "What's your Git Repo Link?",
+        "name": "github"
+    }
+]
