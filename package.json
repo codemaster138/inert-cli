@@ -26,11 +26,14 @@
     },
     "homepage": "https://github.com/codemaster138/inert-cli#readme",
     "dependencies": {
+        "@jsbits/get-package-version": "^1.0.3",
         "chalk": "^4.1.0",
         "enquirer": "^2.3.6",
         "execa": "^4.0.3",
+        "inert-compiler": "^1.3.0",
         "ncp": "^2.0.0",
-        "ora": "^5.1.0"
+        "ora": "^5.1.0",
+        "tauris": "^1.0.0"
     },
     "devDependencies": {
         "@types/ncp": "^2.0.4",
