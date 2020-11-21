@@ -58,7 +58,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var tauris_1 = require("tauris");
 var buildCommand = new tauris_1.Command('build')
     .describe('Compile the project in the current folder')
-    .option('W', {
+    .option('w', {
     alias: ['watch'],
     description: 'Whether to watch for changes and recompile',
     type: 'boolean'
