@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 "use strict";
 /**
  * Inert CLI v2
