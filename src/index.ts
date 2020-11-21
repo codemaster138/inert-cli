@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /**
  * Inert CLI v2
  * 
