@@ -56,33 +56,42 @@ function copyAsync(src, dest) {
         });
     });
 }
-var createCommand = new tauris_1.Command('create')
+var createCommand = new tauris_1.Command('init')
     .describe('Create a new project in the current folder')
     .usage('inert create')
     .handler(function (argv) {
     utils_1.measureTime(function () { return __awaiter(void 0, void 0, void 0, function () {
-        var template, failed, spinner, answers;
+        var failed, group, templates, template, spinner, answers;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     failed = false;
                     return [4 /*yield*/, enquirer_1.prompt([{
                                 type: 'select',
-                                name: 'template',
-                                message: 'Pick a template',
+                                name: 'group',
+                                message: 'What kind of a site do you want to create?',
                                 choices: ['Blog', 'Documentation']
                             }])];
                 case 1:
+                    group = (_a.sent()).group;
+                    templates = fs_1.readdirSync(path_1.resolve(__dirname, "../../templates/" + group));
+                    return [4 /*yield*/, enquirer_1.prompt([{
+                                type: 'select',
+                                name: 'template',
+                                message: 'Pick a template (more coming soon...):',
+                                choices: templates
+                            }])];
+                case 2:
                     template = (_a.sent()).template;
                     spinner = ora_1.default('copying template').start();
-                    return [4 /*yield*/, copyAsync(path_1.resolve(__dirname, "../../templates/" + template), '.')];
-                case 2:
+                    return [4 /*yield*/, copyAsync(path_1.resolve(__dirname, "../../templates/" + group + "/" + template), '.')];
+                case 3:
                     _a.sent();
                     spinner.succeed();
                     console.log();
                     console.log("Almost done! Now let's set up your configuration:");
                     return [4 /*yield*/, enquirer_1.prompt(JSON.parse(fs_1.readFileSync('./config.json').toString())).catch(function () { return (failed = true); })];
-                case 3:
+                case 4:
                     answers = _a.sent();
                     fs_1.unlinkSync('./config.json');
                     if (failed)

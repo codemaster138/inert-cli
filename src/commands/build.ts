@@ -8,16 +8,14 @@ const buildCommand = new Command('build')
         description: 'Whether to watch for changes and recompile',
         type: 'boolean'
     })
-    .handler((argv) => {
-        measureTime(async () => {
-            const { compile, watch } = await import('inert-compiler');
-            if (argv.w) {
-                await watch();
-            } else {
-                await compile();
-            }
-            return true;
-        });
+    .handler(async (argv) => {
+        const { compile, watch } = await import('inert-compiler');
+        if (argv.w) {
+            await watch();
+        } else {
+            await compile();
+        }
+        return true;
     });
 
 export default buildCommand;

@@ -10,6 +10,7 @@ import { Command } from 'tauris';
 import build from './commands/build';
 import create from './commands/create';
 import _import from './commands/import';
+import serve from './commands/serve';
 
 const header = ` _____                 _   
 |_   _|               | |  
@@ -29,6 +30,7 @@ const argv = new Command('inert')
     .command(build)
     .command(create)
     .command(_import)
+    .command(serve)
     .demandArgument()
     .parse(process.argv.slice(2));
 

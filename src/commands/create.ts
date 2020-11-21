@@ -1,6 +1,6 @@
 import { render } from 'ejs';
 import { prompt } from 'enquirer';
-import { readFileSync, unlinkSync, writeFileSync } from 'fs';
+import { readdirSync, readFileSync, unlinkSync, writeFileSync } from 'fs';
 import ncp from 'ncp';
 import ora from 'ora';
 import { resolve } from 'path';
@@ -16,23 +16,30 @@ function copyAsync(src: string, dest: string) {
     });
 }
 
-const createCommand = new Command('create')
+const createCommand = new Command('init')
     .describe('Create a new project in the current folder')
     .usage('inert create')
     .handler((argv) => {
         measureTime(async () => {
-            var template: string;
             var failed: boolean = false;
-            template = (await prompt([{
+            const group = (await prompt([{
+                type: 'select',
+                name: 'group',
+                message: 'What kind of a site do you want to create?',
+                choices: ['Blog', 'Documentation']
+            }]) as any).group;
+
+            const templates = readdirSync(resolve(__dirname, `../../templates/${group}`));
+            const template = (await prompt([{
                 type: 'select',
                 name: 'template',
-                message: 'Pick a template',
-                choices: ['Blog', 'Documentation']
-            }]) as any).template;
+                message: 'Pick a template (more coming soon...):',
+                choices: templates
+            }]) as any).template
 
             const spinner = ora('copying template').start();
 
-            await copyAsync(resolve(__dirname, `../../templates/${template}`), '.');
+            await copyAsync(resolve(__dirname, `../../templates/${group}/${template}`), '.');
             spinner.succeed();
 
             console.log();

@@ -56,31 +56,23 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var tauris_1 = require("tauris");
-var buildCommand = new tauris_1.Command('build')
-    .describe('Compile the project in the current folder')
-    .option('W', {
-    alias: ['watch'],
-    description: 'Whether to watch for changes and recompile',
-    type: 'boolean'
-})
-    .handler(function (argv) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, compile, watch;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0: return [4 /*yield*/, Promise.resolve().then(function () { return __importStar(require('inert-compiler')); })];
-            case 1:
-                _a = _b.sent(), compile = _a.compile, watch = _a.watch;
-                if (!argv.w) return [3 /*break*/, 3];
-                return [4 /*yield*/, watch()];
-            case 2:
-                _b.sent();
-                return [3 /*break*/, 5];
-            case 3: return [4 /*yield*/, compile()];
-            case 4:
-                _b.sent();
-                _b.label = 5;
-            case 5: return [2 /*return*/, true];
-        }
-    });
-}); });
-exports.default = buildCommand;
+var utils_1 = require("./utils");
+var importCommand = new tauris_1.Command('import')
+    .describe('Import from external source & compile the project in the current folder')
+    .handler(function (argv) {
+    utils_1.measureTime(function () { return __awaiter(void 0, void 0, void 0, function () {
+        var _import;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, Promise.resolve().then(function () { return __importStar(require('inert-compiler')); })];
+                case 1:
+                    _import = (_a.sent()).import;
+                    return [4 /*yield*/, _import()];
+                case 2:
+                    _a.sent();
+                    return [2 /*return*/, true];
+            }
+        });
+    }); });
+});
+exports.default = importCommand;
