@@ -9,6 +9,7 @@ import { cyan } from 'chalk';
 import { Command } from 'tauris';
 import build from './commands/build';
 import create from './commands/create';
+import _import from './commands/import';
 
 const header = ` _____                 _   
 |_   _|               | |  
@@ -27,6 +28,7 @@ const argv = new Command('inert')
     })
     .command(build)
     .command(create)
+    .command(_import)
     .demandArgument()
     .parse(process.argv.slice(2));
 
