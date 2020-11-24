@@ -1,0 +1,17 @@
+[
+    {
+        "type": "input",
+        "message": "Name your blog:",
+        "name": "blogName"
+    },
+    {
+        "type": "input",
+        "message": "What's your name?",
+        "name": "ownerName"
+    },
+    {
+        "type": "input",
+        "message": "Describe yourself:",
+        "name": "description"
+    }
+]

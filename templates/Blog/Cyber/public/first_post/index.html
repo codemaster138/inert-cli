@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home | Cyber Blog Template</title>
+    <link rel="stylesheet" href="/index.css" />
+    <link rel="stylesheet" href="/assets/prism.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="preload"
+        as="style"
+        type="text/css"
+        onload="this.rel='stylesheet'">
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet" />
+    </noscript>
+    
+    
+</head>
+
+<body>
+    <div class="width-constraint">
+        <header>
+            <a class="logo" href="/">Cyber</a>
+            <nav>
+                
+                    <a href="/">Home</a>
+                
+                    <a href="https://dev.to/username">DEV.to</a>
+                
+                    <a href="https://twitter.com/username">Twitter</a>
+                
+            </nav>
+            <div class="hamburger">
+                <div class="bar" id="bar-1"></div>
+                <div class="bar" id="bar-2"></div>
+                <div class="bar" id="bar-3"></div>
+            </div>
+        </header>
+        <main>
+            
+                <img src="/assets/server.jpg" alt="Cover Image" class="hero-image" />
+            
+            <h1 class="title">Your first server</h1>
+            <p>To get you started, let&#39;s write a simple API to create a badge for <a href="shields.io">shields.io</a>.</p>
+<p>We&#39;ll be able to use our API to create a badge like this one:
+<img src="https://img.shields.io/endpoint?style=flat&url=https://eonjs-api.herokuapp.com/weekdays-api&v=1" alt="Weekday Badge"></p>
+<p><strong><em>Note</em>: Due to caching, this post might be displaying an old image. I&#39;m not sure, but I think, that this can also happen on GitHub</strong>.</p>
+<h2 id="creating-an-api-📅">Creating an API 📅</h2>
+<p>First, go to your favorite IDE and create a new Project. As with every node project, go and run</p>
+<pre data-lang="bash"><code><span class="token function">npm</span> init -y</code></pre><p>to create your package.json file.</p>
+<p>Now, install the latest <code>stable</code> version of eon.js.</p>
+<pre data-lang="bash"><code><span class="token function">npm</span> <span class="token function">install</span> eonjs@latest</code></pre><p>In your index.js, create a simple Eon.js server:</p>
+<pre data-lang="js"><code><span class="token comment">//! important ! If you're deploying to somewhere like Heroku, leave the port blank.</span>
+<span class="token comment">// During local dev, eon will default to port 8080</span>
+<span class="token comment">// When deployed, eon will default to process.env.PORT </span>
+<span class="token keyword">const</span> eon <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'eonjs'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+eon<span class="token punctuation">.</span>
+    <span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/weekdays-api'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+        <span class="token comment">// API code goes here</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token parameter">p</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Listening on http://localhost:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>p<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>Right after importing <code>eon</code> (outside of the listener!), create a constant to hold the different weekdays:</p>
+<pre data-lang="js"><code><span class="token keyword">const</span> days <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'Sunday'</span><span class="token punctuation">,</span> <span class="token string">'Monday'</span><span class="token punctuation">,</span> <span class="token string">'Tuesday'</span><span class="token punctuation">,</span> <span class="token string">'Wednesday'</span><span class="token punctuation">,</span> <span class="token string">'Thursday'</span><span class="token punctuation">,</span> <span class="token string">'Friday'</span><span class="token punctuation">,</span> <span class="token string">'Saturday'</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre><p>...and one to hold the colors for each day:</p>
+<pre data-lang="js"><code><span class="token keyword">const</span> colors <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'yellowgreen'</span><span class="token punctuation">,</span> <span class="token string">'brightgreen'</span><span class="token punctuation">,</span> <span class="token string">'yellow'</span><span class="token punctuation">,</span> <span class="token string">'orange'</span><span class="token punctuation">,</span> <span class="token string">'blue'</span><span class="token punctuation">,</span> <span class="token string">'blueviolet'</span><span class="token punctuation">,</span> <span class="token string">'ff69b4'</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre><p>Now, inside the listener, retrieve the current day, name of the day, and color:</p>
+<pre data-lang="js"><code><span class="token keyword">var</span> day <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getDay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> dayName <span class="token operator">=</span> days<span class="token punctuation">[</span>day<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> color <span class="token operator">=</span> colors<span class="token punctuation">[</span>day<span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre><p>And last but not least, generate a response:</p>
+<pre data-lang="js"><code><span class="token keyword">return</span> <span class="token punctuation">{</span>
+    schemaVersion<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    label<span class="token operator">:</span> <span class="token string">'today is'</span><span class="token punctuation">,</span>
+    message<span class="token operator">:</span> dayName<span class="token punctuation">,</span>
+    color<span class="token operator">:</span> color
+<span class="token punctuation">}</span></code></pre><p>To recap, our code now looks like this:</p>
+<pre data-lang="js"><code><span class="token keyword">const</span> eon <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'eonjs'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">8080</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Constants</span>
+<span class="token keyword">const</span> days <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'Sunday'</span><span class="token punctuation">,</span> <span class="token string">'Monday'</span><span class="token punctuation">,</span> <span class="token string">'Tuesday'</span><span class="token punctuation">,</span> <span class="token string">'Wednesday'</span><span class="token punctuation">,</span> <span class="token string">'Thursday'</span><span class="token punctuation">,</span> <span class="token string">'Friday'</span><span class="token punctuation">,</span> <span class="token string">'Saturday'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> colors <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'yellowgreen'</span><span class="token punctuation">,</span> <span class="token string">'brightgreen'</span><span class="token punctuation">,</span> <span class="token string">'yellow'</span><span class="token punctuation">,</span> <span class="token string">'orange'</span><span class="token punctuation">,</span> <span class="token string">'blue'</span><span class="token punctuation">,</span> <span class="token string">'blueviolet'</span><span class="token punctuation">,</span> <span class="token string">'ff69b4'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+eon<span class="token punctuation">.</span>
+    <span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/weekdays-api'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+        <span class="token comment">// API code goes here</span>
+        <span class="token keyword">var</span> day <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getDay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> dayName <span class="token operator">=</span> days<span class="token punctuation">[</span>day<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">var</span> color <span class="token operator">=</span> colors<span class="token punctuation">[</span>day<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            schemaVersion<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+            label<span class="token operator">:</span> <span class="token string">'today is'</span><span class="token punctuation">,</span>
+            message<span class="token operator">:</span> dayName<span class="token punctuation">,</span>
+            color<span class="token operator">:</span> color
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token parameter">p</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Listening on http://localhost:</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>p<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><h2 id="deploying-our-api-💻">Deploying our API 💻</h2>
+<p>Now we&#39;ve written our API, but that&#39;s not much good if we can&#39;t really use it. So, let&#39;s deploy our API to Heroku so that <a href="https://shields.io">shields.io</a> can access it. First, go to <a href="https://heroku.com">heroku.com</a> and create a free account, if you haven&#39;t already. Now go to your dashboard and create a new app.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/i/2xp1zf4a11rwqi82q4kb.png" alt="&quot;New&quot; Button"></p>
+<p>I&#39;ll call mine &quot;eonjs-api&quot;
+<img src="https://dev-to-uploads.s3.amazonaws.com/i/gjy7c217upg7b42ixs2u.png" alt="Creating API"></p>
+<p>Now, you need to publish your API&#39;s source code to GitHub so that Heroku can see it.</p>
+<h3 id="setting-up-your-repo">Setting up your repo</h3>
+<p>In your project, create a file containing the following line:</p>
+<pre data-lang="gitignore"><code># Don't upload node_modules to GitHub
+node_modules</code></pre><p>This is so that git doesn&#39;t upload your node_modules to the server. Next, create a GitHub repository. <strong>Make sure to not add a .gitignore, license or README file, otherwise you will be unable to upload your code.</strong> Now, in your project, run the following commands:</p>
+<pre data-lang="bash"><code><span class="token function">git</span> init
+<span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> commit -m <span class="token string">"initial commit"</span><span class="token builtin class-name">.</span>
+<span class="token comment"># Make sure to replace "user-name" and "repo-name" with your GitHub username and repository name</span>
+<span class="token function">git</span> remote <span class="token function">add</span> origin https://github.com/user-name/repo-name
+<span class="token function">git</span> push -u origin master</code></pre><h3 id="connecting-your-repo">Connecting your repo</h3>
+<p>On Heroku&#39;s deploy panel, select the &quot;GitHub&quot; tab.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/i/lhrynp22r91e22eaeofp.png" alt="Tab Select"></p>
+<p>Connect your account, then select your repository. Make sure to activate &quot;automated deploys&quot; a bit farther down on the page.</p>
+<p>To make Heroku deploy your app, go to your project and run</p>
+<pre data-lang="bash"><code><span class="token function">git</span> commit -m <span class="token string">"trigger heroku"</span> --allow-empty
+<span class="token function">git</span> push</code></pre><p>After a couple of minutes (or Seconds!), Heroku will have deployed your app to <code>your-app.herokuapp.com</code> (Mine, for example, is <a href="https://eonjs-api.herokuapp.com/weekdays-api">eonjs-api.herokuapp.com/weekdays-api</a>), and your endpoint will be available at <code>your-app.herokuapp.com/weekdays-api</code></p>
+<h3 id="finally-getting-your-hard-earned-badge">Finally getting your hard-earned badge</h3>
+<p>Now you&#39;ve done a lot of work on your little API, and you want your reward. To retrieve it, simply embed this markdown in your page:</p>
+<pre data-lang="md"><code>![Weekday Badge](https://img.shields.io/endpoint?style=flat&url=https://your-app.herokuapp.com/weekdays-api)</code></pre><p><em>Make sure to replace &quot;your-app&quot; with your app&#39;s name</em></p>
+<p>Mine&#39;s Here: <img src="https://img.shields.io/endpoint?style=flat&url=https://eonjs-api.herokuapp.com/weekdays-api&v=1" alt="Weekday Badge"></p>
+<p><strong>Note: Due to caching, this post might be displaying an old image. I&#39;m not sure, but I think, that this can also happen on GitHub</strong>.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I hope I gave you a good overview of how you can create your own APIs with eon.js &amp; Heroku. Feel free to give me some feedback in the comments. <strong>I&#39;d also appreciate it if you could tell me whether you want more of these tutorials</strong>.</p>
+<p><strong>Thanks for reading!</strong></p>
+
+        </main>
+    </div>
+
+    <script>
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY === 0) {
+                header.style.padding = '2rem';
+            } else {
+                header.style.padding = '1rem';
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home | <%=posts.config.blogName%></title>
+    <link rel="stylesheet" href="/index.css" />
+    <link rel="stylesheet" href="/assets/prism.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="preload"
+        as="style"
+        type="text/css"
+        onload="this.rel='stylesheet'">
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet" />
+    </noscript>
+    <%const marked = require('marked')%>
+    <%const html = require('html-format')%>
+</head>
+
+<body>
+    <div class="width-constraint">
+        <header>
+            <a class="logo" href="/">Cyber</a>
+            <nav>
+                <% posts.config.navLinks.forEach(link => { %>
+                    <a href="<%= link.href %>" class="<%= link.text === 'Home' ? 'bold' : ''%>"><%= link.text %></a>
+                <% }); %>
+            </nav>
+            <div class="hamburger">
+                <div class="bar" id="bar-1"></div>
+                <div class="bar" id="bar-2"></div>
+                <div class="bar" id="bar-3"></div>
+            </div>
+        </header>
+        <main>
+            <img src="/assets/image.jpg" alt="Hero Image" class="hero-image">
+            <h1 class="title">Cyber Blog Template</h1>
+            <p align="center"><%= posts.config.description %></p>
+            <h1 class="title">Recent Posts</h1>
+            <div class="posts-container">
+                <% posts.forEach((post) => { %>
+                    <a href="/<%= post.path %>" class="post">
+                        <h2><%= post.attributes.title %></h2>
+                        <p><%= post.attributes.description %></p>
+                    </a>
+                <% }); %>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY === 0) {
+                header.style.padding = '2rem';
+            } else {
+                header.style.padding = '1rem';
+            }
+        })
+    </script>
+</body>
+
+</html>
