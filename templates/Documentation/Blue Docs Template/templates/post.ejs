@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= post.attributes.title %> | <%=posts.config.blogName%></title>
+    <link rel="stylesheet" href="/index.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+        integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="preload" as="style" onload="this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            rel="stylesheet">
+    </noscript>
+    <% const marked = require('marked') %>
+    <% const html = require('html-format') %>
+</head>
+
+<body>
+    <aside>
+        <% posts.config.sidebar.forEach(({ type, text, href}) => { %>
+        <% if (type === 'heading') { %>
+        <h3 class="group-name"><%= text %></h3>
+        <% } %>
+        <% if (type === 'link') { %>
+        <a href="<%= href %>" class="<%= href === post.href ? 'this-page' : ''%>"><%= text %></a>
+        <% } %>
+        <% }); %>
+    </aside>
+    <div class="hamburger">
+        <div class="line" id="l1"></div>
+        <div class="line" id="l2"></div>
+        <div class="line" id="l3"></div>
+    </div>
+    <a href="/" id="logo-icon">
+        <img src="/assets/logo-icon.svg" alt="" aria-hidden="true">
+    </a>
+    <main>
+        <h1 class="title"><%= post.attributes.title %></h1>
+        <%- post.body %>
+    </main>
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('close');
+            document.body.classList.toggle('show-nav');
+        });
+    </script>
+</body>
+
+</html>

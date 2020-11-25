@@ -1,0 +1,26 @@
+:root {
+    --col-primary: #2e5bdc;
+    --col-primary-tint: #5a82f1;
+    --col-primary-tint-transparent: #5a82f188;
+    --col-primary-ultra-light: #f5f7fc;
+
+    --col-black: #373747;
+    
+    --col-bg: #FFFFFF;
+    --col-fg: var(--col-black);
+
+    --gray-2: #edf2f6;
+
+    --max-contrast: #000000;
+}
+
+body.dark {
+    --col-bg: var(--col-black);
+    --col-fg: #cdcdcd;
+
+    --gray-2: #434358;
+
+    --max-contrast: #ffffff;
+
+    --shadow-blue: var(--shadow-blue-dark)
+}

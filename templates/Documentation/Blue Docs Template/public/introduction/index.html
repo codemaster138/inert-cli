@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction | Blue Docs Template</title>
+    <link rel="stylesheet" href="/index.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+        integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="preload" as="style" onload="this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            rel="stylesheet">
+    </noscript>
+    
+    
+</head>
+
+<body>
+    <aside>
+        
+        
+        <h3 class="group-name">Getting Started</h3>
+        
+        
+        
+        
+        
+        <a href="/introduction" class="">Intro</a>
+        
+        
+        
+        
+        <a href="/api" class="">Core API Reference</a>
+        
+        
+    </aside>
+    <div class="hamburger">
+        <div class="line" id="l1"></div>
+        <div class="line" id="l2"></div>
+        <div class="line" id="l3"></div>
+    </div>
+    <a href="/" id="logo-icon">
+        <img src="/assets/logo-icon.svg" alt="" aria-hidden="true">
+    </a>
+    <main>
+        <h1 class="title">Introduction</h1>
+        <h1 id="headline">Headline</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultrices accumsan enim, ut maximus magna cursus vitae. Integer pulvinar sem.</p>
+<pre data-lang="ts"><code><span class="token comment">// Some Code</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Command <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'tauris'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> argv <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Command</span><span class="token punctuation">(</span><span class="token string">'test'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">option</span><span class="token punctuation">(</span><span class="token string">'v'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+        alias<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'version'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        description<span class="token operator">:</span> <span class="token string">'Display the version'</span><span class="token punctuation">,</span>
+        <span class="token keyword">type</span><span class="token operator">:</span> <span class="token string">'boolean'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">demandArgument</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span>argv<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span>argv<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>argv<span class="token punctuation">.</span>v<span class="token punctuation">)</span> <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'v1.0.0'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+    </main>
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('close');
+            document.body.classList.toggle('show-nav');
+        });
+    </script>
+</body>
+
+</html>

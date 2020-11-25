@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home | <%=posts.config.blogName%></title>
+    <link rel="stylesheet" href="/index.css" />
+    <link rel="stylesheet" href="/assets/prism.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="preload" as="style" onload="this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            rel="stylesheet">
+    </noscript>
+    <%const marked = require('marked')%>
+    <%const html = require('html-format')%>
+</head>
+
+<body>
+    <div id="logo-icon">
+        <img src="/assets/logo-icon.svg" alt="" aria-hidden="true">
+    </div>
+    <section class="cover center-contents">
+        <div class="centered" id="content">
+            <h1 class="logo"><%= posts.config.blogName %></h1>
+            <p class="subtitle"><%= posts.config.description%></p>
+            <div style="text-align: center">
+                <a href="<%= posts.config.gitRepo %>" class="button">GitHub 🐱</a>
+                <a href="/introduction" class="button primary">Documentation 📖</a>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
