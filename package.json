@@ -1,6 +1,6 @@
 {
     "name": "inert-cli",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "description": "CLI for the inert static site generator",
     "main": "index.js",
     "scripts": {
